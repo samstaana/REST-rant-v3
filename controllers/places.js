@@ -24,7 +24,20 @@ router.post('/', (req, res) => {
     }
     places.push(req.body)
     res.redirect('/places')
-  })
-  
+})
 
+// SHOW
+router.get('/:id', (req, res) => {
+    let id = Number(req.params.id)
+    if (isNaN(id)) {
+      res.render('error404')
+    }
+    else if (!places[id]) {
+        res.render('error404')
+    }
+    else {
+      res.render('places/show', { placs: places[id] })
+    }
+})
+  
 module.exports = router
